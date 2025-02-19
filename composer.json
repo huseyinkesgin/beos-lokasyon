@@ -1,5 +1,5 @@
 {
-    "name": "laravel/lokasyon",
+    "name": "beos/lokasyon",
     "description": "Türkiye için lokasyon seçimi",
     "type": "library",
     "require": {

@@ -5,17 +5,18 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\City;
-use App\Models\Town;
-use App\Models\District;
-use App\Models\Neighborhood;
+use App\Models\Beos\City;
+use App\Models\Beos\Town;
+use App\Models\Beos\District;
+use App\Models\Beos\Neighborhood;
+use Faker\Factory as Faker;
 
 class LocationSeeder extends Seeder
 {
-
     protected $cities = [];
     protected $towns = [];
     protected $districts = [];
+    protected $neighborhoods = [];
 
     public function run()
     {
@@ -34,11 +35,16 @@ class LocationSeeder extends Seeder
                 $districtName = trim($row[2]); // Semt
                 $neighborhoodName = trim($row[3]); // Mahalle
                 $postalCode = trim($row[4]); // Posta Kodu
+                $codeCity = "IL" . trim($row[5]); // Kod
+                $codeTown = "ILC" . fake()->numberBetween(1, 10000); // Kod
+                $codeDistrict = "SEM" . fake()->numberBetween(1, 10000); // Kod
+                $codeNeighborhood = "MAH" . fake()->numberBetween(1, 10000); // Kod
 
                 // Şehir
                 if (!isset($this->cities[$cityName])) {
                     $city = City::firstOrCreate(
                         ['name' => $cityName],
+                        ['code' => $codeCity]
                     );
                     $this->cities[$cityName] = $city->id;
                     $this->command->info("Şehir eklendi: {$cityName}");
@@ -49,8 +55,10 @@ class LocationSeeder extends Seeder
                 if (!isset($this->towns[$townKey])) {
                     $town = Town::firstOrCreate(
                         [
+                            'code' => $codeTown,
                             'city_id' => $this->cities[$cityName],
-                            'name' => $townName
+                            'name' => $townName,
+                            'is_active' => true
                         ],
                     );
                     $this->towns[$townKey] = $town->id;
@@ -62,8 +70,10 @@ class LocationSeeder extends Seeder
                 if (!isset($this->districts[$districtKey])) {
                     $district = District::firstOrCreate(
                         [
+                            'code' => $codeDistrict,
                             'town_id' => $this->towns[$townKey],
-                            'name' => $districtName
+                            'name' => $districtName,
+                            'is_active' => true
                         ],
                     );
                     $this->districts[$districtKey] = $district->id;
@@ -73,8 +83,10 @@ class LocationSeeder extends Seeder
                 // Mahalle
                 Neighborhood::firstOrCreate(
                     [
+                        'code' => $codeNeighborhood,
                         'district_id' => $this->districts[$districtKey],
                         'name' => $neighborhoodName,
+                        'is_active' => true
                     ],
                     [
                         'postal_code' => $postalCode,

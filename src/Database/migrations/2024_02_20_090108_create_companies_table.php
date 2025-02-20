@@ -29,7 +29,8 @@ return new class extends Migration
             $table->foreignId('neighbourhood_id')->nullable();
             $table->string('address')->nullable();
             $table->string('description')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->string('status')->default(true);
+            //banka bilgileri many to many olarak başka tabloda olacak.multiple olması için
             $table->timestamps();
         });
     }

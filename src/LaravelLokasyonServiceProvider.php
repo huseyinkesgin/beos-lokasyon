@@ -18,7 +18,7 @@ class LaravelLokasyonServiceProvider extends ServiceProvider
             ], 'laravel-lokasyon-seeders');
               // Models
               $this->publishes([
-                __DIR__.'/Models' => app_path('Models/Lokasyon'),
+                __DIR__.'/Models' => app_path('Models/Beos'),
             ], 'laravel-lokasyon-models');
               // Excel dosyası
               $this->publishes([

@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Beos;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\City;
-use App\Models\District;
-use App\Models\Neighborhood;
-use App\Models\Town;
+use App\Models\Beos\City;
+use App\Models\Beos\District;
+use App\Models\Beos\Neighborhood;
+use App\Models\Beos\Town;
 
 class Customer extends Model
 {
     protected $fillable = [
         'code',
         'customer_type',
-        'company_id',
+        'customer_source',
         'customer_group',
         'name',
         'tc_no',
         'phone',
+        'second_phone',
         'email',
         'city_id',
         'district_id',
@@ -26,6 +27,11 @@ class Customer extends Model
         'description',
     ];
  // ----------------------- RELATIONS ---------------------------------------------- //
+public function companies()
+{
+    return $this->belongsToMany(Company::class);
+}
+
  public function city()
  {
      return $this->belongsTo(City::class);
@@ -56,19 +62,5 @@ class Customer extends Model
         });
     }
 
-    // Müşteri türü filtresi için scope
-    public function scopeByType($query, $type)
-    {
-        return $query->when($type, function($q) use ($type) {
-            return $q->where('customer_type', $type);
-        });
-    }
-
-    // Kategori filtresi için scope
-    public function scopeByCategory($query, $category)
-    {
-        return $query->when($category, function($q) use ($category) {
-            return $q->where('category', $category);
-        });
-    }
+  
 }

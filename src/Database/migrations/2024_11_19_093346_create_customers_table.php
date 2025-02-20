@@ -14,12 +14,21 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-            $table->string('customer_type');
-            $table->foreignId('company_id')->nullable();
-            $table->string('customer_group');
+            $table->string('customer_type')->comment('Bireysel', 'Kurumsal');
+            $table->string('customer_source')->comment(
+                'İlan Sitelerinden',
+                'Ofis Ziyareti',
+                'Referans',
+                'Websitesinden',
+                'Sosyal Medyadan',
+                'Emlakçı',
+                'Diğer');
+          
+            $table->string('customer_group')->comment('Müşteri','Mal Sahibi','Emlakçı','Referans');
             $table->string('name');
             $table->string('tc_no')->nullable();
             $table->string('phone')->nullable();
+            $table->string('second_phone')->nullable();
             $table->string('email')->nullable();
             $table->foreignId('city_id')->nullable();
             $table->foreignId('town_id')->nullable();

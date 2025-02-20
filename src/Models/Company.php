@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Beos;
 
-use App\Traits\GeneratesCode;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use App\Models\City;
-use App\Models\District;
-use App\Models\Town;
-use App\Models\Neighbourhood;
+use App\Models\Beos\City;
+use App\Models\Beos\District;
+use App\Models\Beos\Town;
+use App\Models\Beos\Neighbourhood;
 
 class Company extends Model
 {
@@ -30,7 +28,7 @@ class Company extends Model
         'neighbourhood_id',
         'address',
         'description',
-        'is_active',
+        'status',
     ];
    
 
@@ -65,17 +63,6 @@ class Company extends Model
                        ->orWhere('phone', 'like', '%' . $search . '%')
                        ->orWhere('email', 'like', '%' . $search . '%');
       }
-
-      public function scopeActive($query)
-      {
-          return $query->where('is_active', true);
-      }
-
-      public function scopeInactive($query)
-      {
-          return $query->where('is_active', false);
-      }
-
 
 
     }

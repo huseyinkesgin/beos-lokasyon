@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Beos;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use App\Models\City;
-use App\Models\District;
-use App\Models\Neighbourhood;
-use App\Models\Town;
+use App\Models\Beos\City;
+use App\Models\Beos\District;
+use App\Models\Beos\Neighborhood;
+use App\Models\Beos\Town;
 
 class Personnel extends Model
 {
@@ -27,6 +27,16 @@ class Personnel extends Model
         'start_date',
         'end_date',
     ];
+
+    public function accounts()
+    {
+        return $this->belongsToMany(BankAccount::class);
+    }
+
+    public function portfolios()
+    {
+        return $this->belongsToMany(Portfolio::class);
+    }
 
     public function city()
     {
@@ -57,18 +67,4 @@ class Personnel extends Model
         });
     }
 
-    public function getServiceDurationAttribute()
-    {
-        if (!$this->hire_date) return null;
-
-        $hireDate = Carbon::parse($this->hire_date);
-        $years = (int)$hireDate->diffInYears(now());
-        $months = (int)$hireDate->copy()->addYears($years)->diffInMonths(now());
-
-        $duration = [];
-        if ($years > 0) $duration[] = $years . ' yıl';
-        if ($months > 0) $duration[] = $months . ' ay';
-        
-        return empty($duration) ? '1 aydan az' : implode(' ', $duration);
-    }
 }

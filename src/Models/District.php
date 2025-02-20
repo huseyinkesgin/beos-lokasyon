@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Beos;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\City;
-use App\Models\Neighborhood;
-use App\Models\Town;
+use App\Models\Beos\City;
+use App\Models\Beos\Neighborhood;
+use App\Models\Beos\Town;
 
 class District extends Model
 {

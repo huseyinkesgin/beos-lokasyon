@@ -18,7 +18,7 @@ class LaravelLokasyonServiceProvider extends ServiceProvider
             ], 'laravel-lokasyon-seeders');
               // Excel dosyası
               $this->publishes([
-                __DIR__.'/../resources/excel/dosya.xlsx' => public_path('location/dosya.xlsx'),
+                __DIR__.'/resources/excel/dosya.xlsx' => public_path('location/dosya.xlsx'),
             ], 'laravel-lokasyon-assets');
         }
     }

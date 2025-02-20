@@ -1,11 +1,11 @@
 <?php
 
-namespace laravel\lokasyon\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use laravel\lokasyon\Models\City;
-use laravel\lokasyon\Models\District;
-use laravel\lokasyon\Models\Neighborhood;
+use App\Models\District;
+use App\Models\Neighborhood;
+use App\Models\City;
 
 class Town extends Model
 {

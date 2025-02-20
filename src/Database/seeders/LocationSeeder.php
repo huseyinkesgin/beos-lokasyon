@@ -1,14 +1,14 @@
 <?php
 
-namespace laravel\lokasyon\Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use laravel\lokasyon\Models\City;
-use laravel\lokasyon\Models\Town;
-use laravel\lokasyon\Models\District;
-use laravel\lokasyon\Models\Neighborhood;
+use App\Models\City;
+use App\Models\Town;
+use App\Models\District;
+use App\Models\Neighborhood;
 
 class LocationSeeder extends Seeder
 {

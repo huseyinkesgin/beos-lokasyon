@@ -16,6 +16,10 @@ class LaravelLokasyonServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/Database/Seeders/LocationSeeder.php' => database_path('seeders/LocationSeeder.php'),
             ], 'laravel-lokasyon-seeders');
+              // Excel dosyası
+              $this->publishes([
+                __DIR__.'/public/location/dosya.xlsx' => public_path('location/dosya.xlsx'),
+            ], 'laravel-lokasyon-assets');
         }
     }
 
